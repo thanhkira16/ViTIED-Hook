@@ -25,7 +25,7 @@ The CSVs share the same 43-column schema. The model inputs can be reconstructed 
 - **Set B:** Set A plus caption and hashtag text from `vid_desc_clean` and `vid_hashtags_normalized`. Fit TF-IDF and SVD on each training fold only; the SVD columns are intentionally not stored as globally precomputed values.
 - **Set C:** Set B plus 14 hook features extracted from the first five seconds: six presence indicators, four segment/movement counts, two quantity measures, and two derived measures.
 
-The `hook_label` column contains the eight exploratory labels `Informational`, `Curiosity`, `Visual Salience`, `Emotional`, `Urgency`, `CTA`, `Social Proof`, and `None`. These LLM-assisted labels are descriptive only, were not validated by human annotators, and are not model inputs. The literal value `None` is a valid label; when reading with pandas, use `keep_default_na=False` to preserve it.
+The `hook_label` column contains seven exploratory labels: `Informational`, `Curiosity`, `Visual Salience`, `Emotional`, `Urgency`, `CTA`, and `Social Proof`. The 989 records that were initially left without a clear label were relabeled with a mandatory best-fit choice among these seven using GPT-4.1-mini. In 12 cases with no usable cue, `Informational` was the required fallback with confidence 1 and blank evidence; this fallback does not establish that a clear informational hook was observed. The LLM-assisted labels are descriptive only, were not validated by human annotators, and are not model inputs. Use `keep_default_na=False` to preserve blank evidence.
 
 ## Engagement Score
 
