@@ -11,6 +11,8 @@ This repository contains the release tables for the study **“The First Five Se
 
 Together the files contain 7,046 unique videos from 358 creators. There is no creator overlap between the two partitions. Here, `stream.csv` is the seed-42 validation partition; it is not a separate live-stream dataset.
 
+[Feature dictionary](feature_dictionary.csv) documents all 43 model predictors, including their names, definitions, modalities, calculations, and first feature set. Set A contains 9 predictors, Set B adds 20 (29 total), and Set C adds 14 (43 total). These predictor counts describe the reconstructed model inputs. The release tables have a separate 43-column schema.
+
 ## Dataset construction
 
 The source snapshot contained 9,114 unique video IDs. Following the manuscript’s filtering procedure, inaccessible videos and videos outside the study scope were removed, leaving 7,046 videos. The final seed-42 split was generated with an 80/20 `GroupShuffleSplit` grouped by creator, using `random_state=42`.
