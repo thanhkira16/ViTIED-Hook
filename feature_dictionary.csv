@@ -1,0 +1,44 @@
+feature,feature_set,definition,modality,calculation
+vid_duration_sec,Set A,Video duration in seconds,Video,Numeric value from the cleaned duration field
+post_hour,Set A,Hour of day when the video was posted,Temporal,Numeric posting-hour metadata
+post_day_num,Set A,Day of week when the video was posted,Temporal,Monday=0 through Sunday=6
+is_weekend,Set A,Indicator for Saturday or Sunday posting,Temporal,1 if post_day_num is 5 or 6 and 0 otherwise
+post_hour_sin,Set A,Sine encoding of posting hour,Temporal,sin(2*pi*post_hour/24)
+post_hour_cos,Set A,Cosine encoding of posting hour,Temporal,cos(2*pi*post_hour/24)
+music_originality,Set A,Indicator that the sound is marked as original,Audio metadata,Missing values remain missing; otherwise 1 when the stripped lowercase representation is true and 0 otherwise
+music_nused,Set A,Number of videos using the same sound at crawl time,Audio metadata,Numeric snapshot value in music_nused; not available at posting time
+log_music_nused,Set A,Log transformed sound-use count,Audio metadata,log1p(music_nused)
+caption_svd_0,Set B,First latent caption-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+caption_svd_1,Set B,Second latent caption-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+caption_svd_2,Set B,Third latent caption-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+caption_svd_3,Set B,Fourth latent caption-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+caption_svd_4,Set B,Fifth latent caption-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+caption_svd_5,Set B,Sixth latent caption-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+caption_svd_6,Set B,Seventh latent caption-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+caption_svd_7,Set B,Eighth latent caption-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+caption_svd_8,Set B,Ninth latent caption-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+caption_svd_9,Set B,Tenth latent caption-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+hashtag_svd_0,Set B,First latent hashtag-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+hashtag_svd_1,Set B,Second latent hashtag-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+hashtag_svd_2,Set B,Third latent hashtag-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+hashtag_svd_3,Set B,Fourth latent hashtag-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+hashtag_svd_4,Set B,Fifth latent hashtag-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+hashtag_svd_5,Set B,Sixth latent hashtag-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+hashtag_svd_6,Set B,Seventh latent hashtag-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+hashtag_svd_7,Set B,Eighth latent hashtag-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+hashtag_svd_8,Set B,Ninth latent hashtag-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+hashtag_svd_9,Set B,Tenth latent hashtag-text component,Text,TF-IDF with max_features=500 and min_df=3 then SVD with 10 components fitted in the training fold
+hook_has_speech,Set C,Indicator that speech text is present in any first-five-second interval,Speech,1 if any interval contains non-empty speech content; content is stripped and case-insensitive none/null values are excluded
+hook_has_onscreen_text,Set C,Indicator that on-screen text is present in any interval,Visual/text,1 if any interval contains at least one OCR text item
+hook_has_music,Set C,Indicator that music is present in any interval,Audio,1 if any interval audio.music or audio.has_music value is true or a non-empty string other than none/null
+hook_has_sfx,Set C,Indicator that a sound effect is present in any interval,Audio,1 if any interval audio.sfx or audio.has_sfx value is true or a non-empty string other than none/null
+hook_has_ambient,Set C,Indicator that ambient sound is present in any interval,Audio,1 if any interval audio.ambient or audio.has_ambient_sound value is true or a non-empty string other than none/null
+hook_has_voice,Set C,Indicator that voice is present in any interval,Audio,1 if any interval audio.has_voice value is true or a non-empty string other than none/null
+hook_n_scene_changes,Set C,Count of annotated scene changes across five intervals,Visual,Count of non-empty change/change_from_previous_second values except empty none null and the exact string 'không có thay đổi'; comparisons use stripped lowercase strings
+hook_n_camera_moves,Set C,Count of annotated camera movements across five intervals,Visual,Count of non-empty camera/camera_movement values except empty none null and the exact strings 'tinh' or 'static'; comparisons use stripped lowercase strings
+hook_n_speech_segments,Set C,Number of one-second intervals with speech,Speech,Count of intervals containing non-empty speech content; content is stripped and case-insensitive none/null values are excluded
+hook_n_text_segments,Set C,Number of OCR text items across five intervals,Visual/text,Count of on-screen-text entries
+hook_speech_word_count,Set C,Total whitespace-delimited words in first-five-second speech,Speech,Sum of len(content.split()) across speech intervals
+hook_text_char_count,Set C,Total characters in first-five-second on-screen text,Visual/text,Sum of character lengths of OCR content strings
+hook_scene_change_rate,Set C,Scene-change count per second,Visual,hook_n_scene_changes divided by 5
+hook_avg_words_per_speech_seg,Set C,Average speech words per interval containing speech,Speech,hook_speech_word_count divided by hook_n_speech_segments; 0 when no speech is present
